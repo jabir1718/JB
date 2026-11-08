@@ -1,44 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
-<meta name="color-scheme" content="light">
-<title>JB</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Viso Proto 13Q</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
-  body{color:#14180c;font:12px system-ui;
-       background:linear-gradient(180deg,#ffffff,#f6fbe8 55%,#eef9d8);
+  body{color:#e6e3ef;font:12px system-ui;
+       background:radial-gradient(120% 60% at 50% 0%,#1a1030 0%,#0a0812 45%,#050409 100%);
        display:flex;flex-direction:column;height:100dvh;overflow:hidden}
   #wrap{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:6px}
   canvas{max-height:100%;max-width:100%;aspect-ratio:9/16;border-radius:16px;background:#000;
-         touch-action:none;display:block;box-shadow:0 6px 26px #00000026,0 0 0 1px #00000010}
+         touch-action:none;display:block;box-shadow:0 0 40px #7c3aed44,0 0 0 1px #ffffff14}
   #bar{flex:0 0 auto;max-height:44dvh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:8px 8px 24px}
-  .sec{background:#ffffff;border:1px solid #e2ecc8;border-radius:14px;padding:8px;display:flex;
-       flex-direction:column;gap:7px;flex:0 0 auto;box-shadow:0 1px 2px #00000008}
-  .sec h4{font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#5d7a12;font-weight:800}
+  .sec{background:linear-gradient(180deg,#ffffff0d,#ffffff05);border:1px solid #ffffff14;border-radius:14px;
+       padding:8px;display:flex;flex-direction:column;gap:7px;flex:0 0 auto}
+  .sec h4{font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#a78bfa;font-weight:700}
   .row{display:flex;gap:6px;overflow-x:auto;flex:0 0 auto;align-items:center;padding-bottom:1px}
-  button{background:#f8fbe9;color:#2b3319;border:1px solid #dde8c2;border-radius:11px;min-height:37px;
-         padding:0 13px;font-size:11.5px;white-space:nowrap;flex:0 0 auto;font-weight:600}
-  button:active{background:#eef7d6}
-  button.on{background:#d8f96a;border-color:#93cf12;color:#1a2200}
-  button.lock{background:#c8f3d8;border-color:#3ec97a;color:#0a3d20}
-  button.prim{background:linear-gradient(180deg,#c8f542,#98dd10);border-color:#8bcb06;color:#16200a}
+  button{background:#ffffff0f;color:#d9d5e6;border:1px solid #ffffff1f;border-radius:11px;min-height:37px;
+         padding:0 13px;font-size:11.5px;white-space:nowrap;flex:0 0 auto;font-weight:500}
+  button:active{background:#ffffff24}
+  button.on{background:#7c3aed40;border-color:#a78bfa;color:#fff}
+  button.lock{background:#16a34a30;border-color:#4ade80;color:#bbf7d0}
+  button.prim{background:linear-gradient(180deg,#8b5cf6,#6d28d9);border-color:#a78bfa;color:#fff}
   button.nudge{min-width:42px;font-size:14px;padding:0 9px}
-  label{display:flex;align-items:center;gap:9px;font-size:10.5px;color:#5a6449}
+  label{display:flex;align-items:center;gap:9px;font-size:10.5px;color:#a29db6}
   label span{width:78px;flex:0 0 auto}
-  input[type=range]{flex:1;accent-color:#7cc40a;height:26px}
+  input[type=range]{flex:1;accent-color:#a78bfa;height:26px}
   input[type=file]{display:none}
-  input[type=text]{flex:1;background:#f8fbe9;border:1px solid #dde8c2;border-radius:9px;
-    color:#1a2200;padding:9px 11px;font-size:12px;min-height:36px}
-  .pal{width:26px;height:26px;border-radius:8px;border:1px solid #cfdcb4;flex:0 0 auto}
-  .pal.on{outline:2px solid #1a2200}
+  input[type=text]{flex:1;background:#ffffff10;border:1px solid #ffffff20;border-radius:9px;
+    color:#fff;padding:9px 11px;font-size:12px;min-height:36px}
+  .pal{width:26px;height:26px;border-radius:8px;border:1px solid #ffffff26;flex:0 0 auto}
+  .pal.on{outline:2px solid #fff}
   .mline{display:flex;align-items:center;gap:8px}
-  .mline b{font-size:10px;color:#5a6449;width:64px;flex:0 0 auto;font-weight:600}
+  .mline b{font-size:10px;color:#b9b3c9;width:64px;flex:0 0 auto;font-weight:500}
   .chip{min-height:32px;font-size:10.5px;padding:0 10px;border-radius:9px}
 </style>
-</head>
-<body>
 <div id="wrap"><canvas id="c" width="1080" height="1920"></canvas></div>
 <div id="bar">
   <div class="sec"><h4>Media</h4>
@@ -143,6 +138,7 @@
 <input id="fBgI" type="file" accept="image/*"><input id="fBgV" type="file" accept="video/*">
 <video id="vid" playsinline muted loop style="display:none"></video>
 <video id="bvid" playsinline muted loop style="display:none"></video>
+
 <script>
 "use strict";
 const c=document.getElementById('c'),x=c.getContext('2d');
@@ -424,6 +420,7 @@ function buildMask(){
     mx.restore();
   }
 }
+
 function bands(pw){if(!an||!playing)return[0,0,0,0,0,0];an.getByteFrequencyData(buf);
   const n=buf.length,out=[];
   for(let b=0;b<6;b++){let s=0,c0=Math.floor(n*Math.pow(b/6,1.7)),c1=Math.floor(n*Math.pow((b+1)/6,1.7));
@@ -707,7 +704,7 @@ function drawObjects(ctx,b,dt){objects.forEach((ob,i)=>{stepObject(ob,b,dt);
   ctx.save();ctx.translate(ob.x,ob.y);ctx.rotate(ob.rot);const s=ob.sc*(1+pulse*.12);ctx.scale(s,s);
   ctx.shadowColor=gradAt(ob.x,ob.y);ctx.shadowBlur=16+pulse*55;
   ctx.drawImage(ob.img,-ob.img.width/2,-ob.img.height/2);
-  if(i===selObj){ctx.shadowBlur=0;ctx.strokeStyle='#7cc40a';ctx.lineWidth=3/s;
+  if(i===selObj){ctx.shadowBlur=0;ctx.strokeStyle='#b054f0';ctx.lineWidth=3/s;
     ctx.strokeRect(-ob.img.width/2,-ob.img.height/2,ob.img.width,ob.img.height);}
   ctx.restore();});}
 
@@ -826,5 +823,3 @@ function frame(t){
 }
 requestAnimationFrame(frame);
 </script>
-</body>
-</html>
